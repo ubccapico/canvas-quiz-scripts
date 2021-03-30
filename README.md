@@ -9,4 +9,9 @@ This respository contains 3 main scripts:
 ## Getting Started
 
 ### Requirements:
-
+* Python 3.9 or later - [found here](http://www.python.org/getit/)
+* All libraries listed in requirements.txt. To get these, simply run a pip install:
+```
+pip install -r requirements.txt
+```
+* You will also need a [Canvas API token](https://community.canvaslms.com/docs/DOC-10806-4214724194)
