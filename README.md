@@ -23,7 +23,7 @@ pip install -r requirements.txt
 * If the canvas user id is available, this can be added under a column titled **ID**.
 * Alternatively, any file which has the required headers can be used as input for this script. All extra/unrecognized columns are ignored  
 ![Example input file for assign_quiz](https://github.com/Renu-R/documentation_images/blob/main/assign_quiz_sample.png)
-(Above is a sample input file, the bolded column titles are required to run the script)
+(Above is a sample input file, the bolded column titles are required to run the script)  
 * To run the script, you can either use your terminal or drag and drop the input csv in the script file.
 * When using the terminal, navigate to the folder which contains the local repository and type in `python3 assign_quiz.py data.csv` (or whatever the name of your input file may be). Make sure that the input file exits within your local repository folder.
 
