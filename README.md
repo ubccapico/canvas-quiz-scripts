@@ -16,15 +16,31 @@ pip install -r requirements.txt
 ```
 * You will also need a [Canvas API token](https://community.canvaslms.com/docs/DOC-10806-4214724194) which you can simply paste to the file named "token" without any additional characters.
 
-### Runnng a Python Script
+### Running a Python Script
 
 #### assign_quiz
 * You can set up the input csv with the following required columns: **SIS ID** (student id) and **assignment_id**
 * If the canvas user id is available, this can be added under a column titled **ID**.
+* A student under **SIS ID** is assigned to the corresponding assignment under **assignment_id**.
 * Alternatively, any file which has the required headers can be used as input for this script. All extra/unrecognized columns are ignored  
 ![Example input file for assign_quiz](https://github.com/Renu-R/documentation_images/blob/main/assign_quiz_sample.png)  
 Fig 1: a sample input file for assign_quiz, the bolded column titles are required to run the script  
 * To run the script, you can either use your terminal or drag and drop the input csv in the script file.
-* When using the terminal, navigate to the folder which contains the local repository and type in `python3 assign_quiz.py data.csv` (or whatever the name of your input file may be). Make sure that the input file exits within your local repository folder.
+* When using the terminal, navigate to the folder which contains the local repository and type in `python3 assign_quiz.py [Enter you input file followed by .csv].` Make sure that the input file exits within your local repository folder.
 
+### moderate_quiz
+* You can set up the input csv with the following required columns: **SIS ID** (student id) and **time**
+* If the canvas user id is available, this can be added under a column titled **ID**.
+* **SIS ID** refers to the list of students you want to moderate. The **time** column refers to extra time you would like to add to a student's attempt. It can be in a multiplicative or additive form. For example, for a 90 min quiz, a multiplicative input of 1.5  would have the same effect as an additive input of 45 mins. Therefore, both 1.5 and 45 are valid inputs under the column.
+* To run the script, you can either use your terminal or drag and drop the input csv in the script file.
+* When using the terminal, navigate to the folder which contains the local repository and type in `python3 moderate_quiz.py [Enter you input file followed by .csv].` Make sure that the input file exits within your local repository folder.
 
+### edit_override
+* You can set up the input csv with the following required columns: **SIS ID** (student id).
+* To run the script, you can either use your terminal or drag and drop the input csv in the script file.
+* **SIS ID** refers to the students you would like to add or delete from an override.
+* If the canvas user id is available, this can be added under a column titled **ID**.
+* When using the terminal, navigate to the folder which contains the local repository and type in `python3 edit_quiz.py [Enter you input file followed by .csv].` Make sure that the input file exits within your local repository folder.
+
+### Notes
+- The **Gradebook** from Canvas can be used as an input file for all of the scripts. Since it already has the user ids in it, there is no need to change the headers. You would only need to add the columns for **time** for **moderate_quiz** or **assignment_id** for **assign_quiz** depending on which script you wish to run.
