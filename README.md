@@ -31,7 +31,8 @@ Fig 1: a sample input file for assign_quiz, the bolded column titles are require
 ### moderate_quiz
 * You can set up the input csv with the following required columns: **SIS ID** (student id) and **time**
 * If the canvas user id is available, this can be added under a column titled **ID**.
-* **SIS ID** refers to the list of students you want to moderate. The **time** column refers to extra time you would like to add to a student's attempt. It can be in a multiplicative or additive form. For example, for a 90 min quiz, a multiplicative input of 1.5  would have the same effect as an additive input of 45 mins. Therefore, both 1.5 and 45 are valid inputs under the column.
+* **SIS ID** refers to the list of students you want to moderate. The **time** column refers to extra time you would like to add to a student's attempt. It can be in a multiplicative or additive form. For example, for a 90 min quiz, a multiplicative input of 1.5  would have the same effect as an additive input of 45 mins. Therefore, both 1.5 and 45 are valid inputs under the column.  
+![Example input file for moderate_quiz](https://github.com/Renu-R/documentation_images/blob/main/moderate_sample.png)  
 * To run the script, you can either use your terminal or drag and drop the input csv in the script file.
 * When using the terminal, navigate to the folder which contains the local repository and type in `python3 moderate_quiz.py [Enter you input file followed by .csv].` Make sure that the input file exits within your local repository folder.
 
@@ -40,6 +41,7 @@ Fig 1: a sample input file for assign_quiz, the bolded column titles are require
 * To run the script, you can either use your terminal or drag and drop the input csv in the script file.
 * **SIS ID** refers to the students you would like to add or delete from an override.
 * If the canvas user id is available, this can be added under a column titled **ID**.
+![Example input file for edit_override](https://github.com/Renu-R/documentation_images/blob/main/edit_override_sample.png)  
 * When using the terminal, navigate to the folder which contains the local repository and type in `python3 edit_quiz.py [Enter you input file followed by .csv].` Make sure that the input file exits within your local repository folder.
 
 ### Notes
