@@ -44,7 +44,7 @@ def add_canvas_ids(input_file, course_id):
         user_ids = df['ID']
 
     except KeyError:
-        sis_ids = df['sis_id']
+        sis_ids = df['SIS_ID']
         user_ids = []
 
         for id in sis_ids:
