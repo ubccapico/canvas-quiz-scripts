@@ -81,7 +81,7 @@ data = assignment.get_overrides()
 print("Current Overrides with IDs")
 
 for element in data:
-    print(element)
+    print(str(len(element.__getattribute__('student_ids')))+ ' students ('+ str(element.__getattribute__('id'))+')')
 
 override_id = input("Enter ID of override to edit: ")
 print(assignment.get_override(override_id))
