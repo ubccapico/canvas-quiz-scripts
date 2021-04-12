@@ -49,7 +49,11 @@ def get_quizzes(course_id):
     print("List of quizzes:")
     for quiz in response:
         quiz_ids.append(quiz['id'])
-        print(quiz['title'] + " " + str(quiz['id']))
+        print("") #line break
+        print(quiz['title'])
+        print("Quiz ID: " + str(quiz['id']) + ", " + "Time limit: "+ str(quiz['time_limit']))
+        
+
 
 
 def moderate(quiz_id, student_ids, time, choice):
