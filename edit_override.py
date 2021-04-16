@@ -80,8 +80,12 @@ data = assignment.get_overrides()
 
 print("Current Overrides with IDs")
 
+curr_students_in_assignment = []
+
 for element in data:
+    curr_students_in_assignment.append((element.__getattribute__('student_ids')))
     print(str(len(element.__getattribute__('student_ids')))+ ' students ('+ str(element.__getattribute__('id'))+')')
+
 
 override_id = input("Enter ID of override to edit: ")
 print(assignment.get_override(override_id))
@@ -113,7 +117,7 @@ else:
                 print("Student does not exist: " + str(student))
     else:
         for student in edited_students_list:
-            if student not in curr_students:
+            if student not in curr_students_in_assignment:
                 curr_students.append(student)
 
     print("Updated list of students:")
