@@ -161,6 +161,6 @@ response = make_request("courses/{course_id}/assignments/{assignment_id}/overrid
                             post_fields= post_fields)
 
 if(response.status_code == 200):
-print("successful")
-else
-print("unsuccessful")
+    print("successful")
+else:
+    print("unsuccessful: Response status code:"+ response.status_code)
