@@ -88,7 +88,6 @@ for element in data:
 
 
 override_id = input("Enter ID of override to edit: ")
-print(assignment.get_override(override_id))
 override = assignment.get_override(override_id)
 
 print(override)
@@ -123,6 +122,11 @@ else:
     print("Updated list of students:")
     print(curr_students)
 
+    if len(curr_students)==0:
+        override.delete()
+        print("All students were removed so the override was deleted")
+        sys.exit()
+
 
 try:
     unlock_at = override.__getattribute__('unlock_at')
@@ -156,4 +160,7 @@ response = make_request("courses/{course_id}/assignments/{assignment_id}/overrid
                             method="PUT",
                             post_fields= post_fields)
 
-print(response)
+if(response.status_code == 200):
+print("successful")
+else
+print("unsuccessful")
