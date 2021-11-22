@@ -16,6 +16,15 @@ pip install -r requirements.txt
 ```
 * You will also need a [Canvas API token](https://community.canvaslms.com/docs/DOC-10806-4214724194) which you can simply paste to the file named "token" without any additional characters.
 
+
+### Creating a .env file
+Create a .env file in the root directory with the following fields:
+```
+CANVAS_API_TOKEN={YOUR API KEY}
+INSTANCE={YOUR API DOMAIN}
+```
+> An example canvas domain is: https://{school}.instructure.com
+
 ### Running a Python Script
 
 #### assign_quiz
@@ -33,10 +42,13 @@ pip install -r requirements.txt
 * When using the terminal, navigate to the folder which contains the local repository and type in `python3 assign_quiz.py [Enter you input file followed by .csv].` Make sure that the input file exits within your local repository folder.
 
 ### moderate_quiz
-* You can set up the input csv with the following required columns: **SIS_ID** (student id) and **time**
-* If the canvas user id is available, this can be added under a column titled **ID**.
+* You can set up the input csv with the following required columns: **sis_id** (student id) and **time**
 * **SIS_ID** refers to the list of students you want to moderate. The **time** column refers to extra time you would like to add to a student's attempt. It can be in a multiplicative or additive form. For example, for a 90 min quiz, a multiplicative input of 1.5  would have the same effect as an additive input of 45 mins. Therefore, both 1.5 and 45 are valid inputs under the column.  
-![Example input file for moderate_quiz](https://github.com/Renu-R/documentation_images/blob/main/moderate_sample.png)  
+* columns with `*` are optional
+    |*name           |sis_id  |time         |
+    |----------------|--------|-------------|
+    |Student 1       |12345678|15           |
+    |Student 2       |24681012|45           |
 * To run the script, you can either use your terminal or drag and drop the input csv in the script file.
 * When using the terminal, navigate to the folder which contains the local repository and type in `python3 moderate_quiz.py [Enter you input file followed by .csv].` Make sure that the input file exits within your local repository folder.
 
