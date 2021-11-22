@@ -7,27 +7,28 @@ from urllib.request import Request, urlopen
 import sys
 import settings
 from canvasapi import Canvas
+from helpers import make_request
 
 
-def make_request(url, method="GET", post_fields={}):
-    BASE_URL = settings.INSTANCE + "/api/v1"
-    # build request
-    request = Request("{base_url}/{call_url}".format(base_url=BASE_URL, call_url=url))
-    request.add_header("Authorization", "Bearer {token}".format(token=settings.TOKEN))
-    request.method = method
-    if post_fields:
-        request.data = urlencode(post_fields).encode()
+# def make_request(url, method="GET", post_fields={}):
+#     BASE_URL = settings.INSTANCE + "/api/v1"
+#     # build request
+#     request = Request("{base_url}/{call_url}".format(base_url=BASE_URL, call_url=url))
+#     request.add_header("Authorization", f"Bearer {settings.TOKEN}".format(token=settings.TOKEN))
+#     request.method = method
+#     if post_fields:
+#         request.data = urlencode(post_fields).encode()
 
-    # open request
-    try:
-        response = urlopen(request)
-    except HTTPError as e:
-        return
+#     # open request
+#     try:
+#         response = urlopen(request)
+#     except HTTPError as e:
+#         return
 
-    # decode response
-    decoded_response = response.readline().decode("utf-8")
-    response_body = json.loads(decoded_response, object_pairs_hook=dict)
-    return response_body
+#     # decode response
+#     decoded_response = response.readline().decode("utf-8")
+#     response_body = json.loads(decoded_response, object_pairs_hook=dict)
+#     return response_body
 
 
 # Functions:
