@@ -1,5 +1,5 @@
 """
-This file is responsible for defining/initializing global variables.
+This file is responsible for accessing variables in the .env and making them available globally 
 """
 
 from dotenv import load_dotenv
