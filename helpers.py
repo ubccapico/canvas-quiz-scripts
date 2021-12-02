@@ -27,28 +27,7 @@ def make_request(url, method="GET", post_fields={}):
     return response_body
 
 
-# def get_student(course_id, student_id):
-#     try:
-#         response = make_request(
-#         "courses/{course_id}/users/sis_user_id:{user_id}?include[]=enrollments".format(course_id=course_id, user_id=student_id,))
-#         return response['id']
-#     except Exception as e:
-#         print(f"ERROR: Unable to get student with ID: {student_id}")
-#         return "NOT FOUND"
-
-
-# def add_canvas_ids(input_file, course_id):
-#     df = pd.read_csv(input_file)
-#     try:
-
-#         user_ids = df["canvas_id"]
-
-#     except KeyError:
-#         sis_ids = df['sis_id']
-#         user_ids = []
-
-#         for student_id in sis_ids:
-#             user_ids.append(get_student(course_id, student_id))
-
-#         df['canvas_id'] = user_ids
-#         df.to_csv(input_file, index=False)
+def get_user_id(canvas, sis_id):
+    sis_id = int(sis_id)
+    user = canvas.get_user(sis_id, "sis_user_id")
+    return user.id
