@@ -14,7 +14,6 @@ def make_request(url, method="GET", post_fields={}):
     request.method = method
     if post_fields:
         request.data = urlencode(post_fields, doseq=True).encode()
-        print(request.data)
     try:
         response = urlopen(request)
     except HTTPError as e:
@@ -28,6 +27,9 @@ def make_request(url, method="GET", post_fields={}):
 
 
 def get_user_id(canvas, sis_id):
+    """
+    Given a SIS user id as input and a canvas instance, return a canvas user id
+    """
     sis_id = int(sis_id)
     user = canvas.get_user(sis_id, "sis_user_id")
     return user.id

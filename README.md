@@ -25,6 +25,15 @@ INSTANCE={YOUR API DOMAIN}
 ```
 > An example canvas domain is: https://{school}.instructure.com
 
+
+### Setting up your environment
+> You can set up your environment any way you'd like. Below are instructions for creating it with virtualenv
+
+* `pip install virtualenv` (if you don't already have virtualenv installed)
+* `virtualenv venv` to create your new environment (called 'venv' here)
+* `source venv/bin/activate` (to enter the virtual environment)
+* `pip install -r requirements.txt` (to install the requirements in the current environment)
+
 ### Running a Python Script
 
 #### assign_quiz
