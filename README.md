@@ -64,4 +64,4 @@ INSTANCE={YOUR API DOMAIN}
 * When using the terminal, navigate to the folder which contains the local repository and type in `python3 edit_quiz.py [Enter you input file followed by .csv].` Make sure that the input file exits within your local repository folder.
 
 ### Notes
-- The **Gradebook** from Canvas can be used as an input file for all of the scripts. Since it already has the SIS User Ids in it, there is no need to change the headers. You would only need to add the columns for **time** for **moderate_quiz** or **assignment_id** for **assign_quiz** depending on which script you wish to run.
+- The **Gradebook** from Canvas can be used as an input file for all of the scripts. Since it already has the SIS User Ids in it, you can simply rename the column to **sis_id**. You would also need to add the columns for **time** for **moderate_quiz** or **assignment_id** for **assign_quiz** depending on which script you wish to run.
