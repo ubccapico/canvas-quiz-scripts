@@ -70,22 +70,31 @@ def process_input(canvas, input_csv):
     return assignment_dict
 
 
-if len(sys.argv) > 1:
-    input_csv = sys.argv[1]
-else:
-    print(
-        "Please run the program again with the csv file passed as command-line arguments"
-    )
-    sys.exit()
+def main(input_csv):
+    """
+    Main entry point for assign_quiz.py script
+    """
 
-# Prompt the user for a course ID
-course_id = input("Enter course ID: ")
+    # Prompt the user for a course ID
+    course_id = input("Enter course ID: ")
 
-canvas = canvasapi.Canvas(settings.INSTANCE, settings.TOKEN)
+    canvas = canvasapi.Canvas(settings.INSTANCE, settings.TOKEN)
 
-# add_canvas_ids(input_csv, course_id)
-assignment_dict = process_input(canvas, input_csv)
+    # add_canvas_ids(input_csv, course_id)
+    assignment_dict = process_input(canvas, input_csv)
 
-# Calls assign_quiz function once for every assignment ID
-for key in assignment_dict:
-    assign_quiz(canvas, key, course_id, assignment_dict.get(key))
+    # Calls assign_quiz function once for every assignment ID
+    for key in assignment_dict:
+        assign_quiz(canvas, key, course_id, assignment_dict.get(key))
+
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        input_csv = sys.argv[1]
+    else:
+        print(
+            "Please run the program again with the csv file passed as command-line arguments"
+        )
+        sys.exit()
+
+    main(input_csv)
