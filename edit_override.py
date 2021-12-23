@@ -25,8 +25,7 @@ def main(input_csv):
         sys.exit()
 
     df = pd.read_csv(input_csv)
-    student_sis_ids = df["sis_id"].to_list()
-    student_canvas_ids = [get_user_id(canvas, x) for x in student_sis_ids]
+    student_canvas_ids = df["id"].to_list()
 
     print(f"\nStudent Canvas ids: {student_canvas_ids}")
 

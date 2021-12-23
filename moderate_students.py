@@ -21,7 +21,7 @@ def print_quizzes(course_id):
         print(f"Quiz ID: {str(quiz['id'])}, Time limit: {str(quiz['time_limit'])}")
 
 
-def moderate(course_id, quiz_id, student_ids, list_of_time_adjustments, choice):
+def moderate(course_id, quiz_id, user_ids, list_of_time_adjustments, choice):
     """
     Given a specific quiz, iterates through a list of students and
     """
@@ -32,9 +32,7 @@ def moderate(course_id, quiz_id, student_ids, list_of_time_adjustments, choice):
             quiz["time_limit"], list_of_time_adjustments
         )
 
-    for n, sis_id in enumerate(student_ids):
-
-        user_id = get_user_id(canvas, sis_id)
+    for n, user_id in enumerate(user_ids):
 
         make_request(
             f"courses/{course_id}/quizzes/{quiz_id}/extensions",
@@ -69,7 +67,7 @@ def main(input_csv):
     # READ DATA
     df = pd.read_csv(input_csv)
 
-    student_ids = df["sis_id"].tolist()
+    user_ids = df["id"].tolist()
     list_of_time_adjustments = df["time"].tolist()
 
     choice = input("Enter 1 if time in file is additive or 2 if it is multiplicative:")
@@ -77,7 +75,7 @@ def main(input_csv):
         # convert user input for quiz ids to list of integers
         quiz_ids = [int(x) for x in user_quiz_ids.split(" ")]
         for quiz_id in quiz_ids:
-            moderate(course_id, quiz_id, student_ids, list_of_time_adjustments, choice)
+            moderate(course_id, quiz_id, user_ids, list_of_time_adjustments, choice)
         print("Finished")
     else:
         print("Invalid input")
