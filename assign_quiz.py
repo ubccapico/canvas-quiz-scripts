@@ -52,11 +52,8 @@ def process_input(canvas, input_csv):
 
     for _, row in df.iterrows():
         assignment_id = row["assignment_id"]
-        sis_id = row["sis_id"]
-        user_id = None
         try:
-            user = canvas.get_user(sis_id, "sis_user_id")
-            user_id = user.id
+            user_id = row["id"]
         except canvasapi.exceptions.ResourceDoesNotExist as e:
             print(e)
             print(f"unable to find student: {sis_id}")
