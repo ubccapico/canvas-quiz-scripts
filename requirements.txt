@@ -1,3 +1,4 @@
 pandas == 1.2.1
 canvasapi
 urllib3 == 1.26.2
+python-dotenv

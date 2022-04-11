@@ -1,61 +1,100 @@
-import json
-import csv
-from canvasapi import Canvas
 import pandas as pd
+import canvasapi
 import sys
-import add_user_id_col
+
+import settings
 
 
-with open("token") as t:
-    token = t.read()
-
-url = 'https://ubc.instructure.com'
-
-if (len(sys.argv) > 1):
-    input_file = sys.argv[1]
-else:
-    print("Please run the program again with the csv file passed as command-line arguments")
-    sys.exit()
-
-course_id = input("Enter course ID:")
-add_user_id_col.add_canvas_ids(input_file, course_id)
-canvas = Canvas(url, token)
-
-
-# Function to assign quiz in Canvas. Takes assignment ID, course ID and students' Canvas user ID.
-
-
-def assign_quiz(assignment_id, course_id, student_id):
-    course = canvas.get_course(course_id)
-    assignment = course.get_assignment(assignment_id)
-    override = assignment.create_override(
-        assignment_override={"student_ids": student_id})
-
-
-# Creates an array of all assignment IDs and creates a list of arrays containing student IDs for each assignment ID
-
-def process_input(input_file):
-    df = pd.read_csv(input_file)
+def assign_quiz(canvas, assignment_id, course_id, student_id):
+    """
+    Function to assign quiz in Canvas. Takes assignment ID, course ID and students' Canvas user ID.
+    """
     try:
-        user_ids = (df['ID']).tolist()
-        assignment_ids = (df['assignment_id']).tolist()
-    except NameError:
-        print("Column titles not recognized")
+        course = canvas.get_course(course_id)
+        assignment = course.get_assignment(assignment_id)
+    except canvasapi.exceptions.Unauthorized as e:
+        print(
+            f"ERROR: Course ({course_id}) does not exist OR user is not authorized to access"
+        )
+        return
+    except TypeError:
+        print(f"ERROR: Course ID must be an INTEGER. Instead given: {course_id}")
+        return
+    except Exception as e:
+        print(
+            f"ERROR: Unable to fetch assignment, please check assignment ID: {assignment_id}"
+        )
+        return
+
+    # Filter out students who could not be found
+    student_id = list(filter(lambda x: x != None, student_id))
+    if len(student_id) == 0:
+        print(
+            f"No valid student ids provided for course ({course_id}), assignment ({assignment_id})"
+        )
+        return
+
+    try:
+        assignment.create_override(assignment_override={"student_ids": student_id})
+    except canvasapi.exceptions.BadRequest:
+        print(
+            f"ERROR Unable to add students with ids: {student_id} to assignment. Please ensure all students don't already belong to assignment"
+        )
+
+
+def process_input(canvas, input_csv):
+    """
+    Creates an dictionary of all assignment IDs and assigns a list containing student IDs for each assignment ID
+    """
+    df = pd.read_csv(input_csv)
 
     assignment_dict = {}
-    # creates dictionary
-    for n, id in enumerate(assignment_ids):
-        if id in assignment_dict:
-            assignment_dict[id].append(user_ids[n])
+
+    for _, row in df.iterrows():
+        assignment_id = row["assignment_id"]
+        sis_id = row["sis_id"]
+        user_id = None
+        try:
+            user = canvas.get_user(sis_id, "sis_user_id")
+            user_id = user.id
+        except canvasapi.exceptions.ResourceDoesNotExist as e:
+            print(e)
+            print(f"unable to find student: {sis_id}")
+
+        if assignment_id in assignment_dict:
+            assignment_dict[assignment_id].append(user_id)
 
         else:
-            assignment_dict[id] = [user_ids[n]]
+            assignment_dict[assignment_id] = [user_id]
 
     return assignment_dict
 
 
-assignment_dict = process_input(input_file)
+def main(input_csv):
+    """
+    Main entry point for assign_quiz.py script
+    """
 
-# Calls assign_quiz function once for every assignment ID
-for key in assignment_dict:
-    assign_quiz(key, course_id, assignment_dict.get(key))
+    # Prompt the user for a course ID
+    course_id = input("Enter course ID: ")
+
+    canvas = canvasapi.Canvas(settings.INSTANCE, settings.TOKEN)
+
+    # add_canvas_ids(input_csv, course_id)
+    assignment_dict = process_input(canvas, input_csv)
+
+    # Calls assign_quiz function once for every assignment ID
+    for key in assignment_dict:
+        assign_quiz(canvas, key, course_id, assignment_dict.get(key))
+
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        input_csv = sys.argv[1]
+    else:
+        print(
+            "Please run the program again with the csv file passed as command-line arguments"
+        )
+        sys.exit()
+
+    main(input_csv)
