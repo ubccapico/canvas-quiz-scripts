@@ -53,7 +53,7 @@ INSTANCE={YOUR API DOMAIN}
 
 * A student under **id** is assigned to the corresponding assignment under **assignment_id**. (assignment id is different from quiz id)
 * To run the script, you can either use your terminal or drag and drop the input csv in the script file.
-* When using the terminal, navigate to the folder which contains the local repository and type in `python3 assign_quiz.py [Enter you input file followed by .csv].` Make sure that the input file exits within your local repository folder.
+* When using the terminal, navigate to the folder which contains the local repository and type in `python3 assign_quiz.py [Enter you input file followed by .csv].` Make sure that the input file exists within your local repository folder.
 * **Note**: Try running `python assign_quiz.py [Enter you input file followed by .csv]` if the above command does not work.
 
 ### moderate_quiz
