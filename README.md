@@ -9,14 +9,27 @@ This repository contains 3 main scripts:
 ## Getting Started
 
 ### Requirements:
-* Clone the repo into your preferred IDE, for example, Visual Studio Code 
+* Clone the repo into your preferred IDE, for example, Visual Studio Code
 * Python 3.9 or later - [found here](http://www.python.org/getit/)
+* A [Canvas API token](https://learninganalytics.ubc.ca/for-students/canvas-api/). Create a blank file with no type named "token" in the cloned repo folder, meaning the file does not end with .txt or .py. Paste your generated Canvas API token to the "token" file without any additional characters.
 * All libraries listed in requirements.txt. To get these, simply run a pip install in the terminal:
 ```
 pip install -r requirements.txt
 ```
-* **Note**: If the above line results in a “Failed building wheel for pandas” error, change the line "pandas == 1.2.1" to “pandas == 1.4.2” in requirements.txt.
-* You will also need a [Canvas API token](https://learninganalytics.ubc.ca/for-students/canvas-api/). Create a blank file with no type named "token", meaning the file does not end with .txt or .py. Paste your generated Canvas API token to the "token" file without any additional characters.
+**Troubleshooting for Window Users:**
+* Running commands with "pip" or "pip3" heading shows error that the command cannot be found & need to check your path:
+    1. In the Window's search bar, find "Edit the system environment variables", a pop up should appear upon clicking it.
+    2. Click on "Advanced" from the top bars.
+    3. Click "Environment Variables near the bottom right.
+    4. Under "System Variables", (NOT "User Variables"), double click on "Path" to open it.
+    5. In the new pop up called "Edit environment variable", click "New" on the right.
+    6. Enter two new paths depending on where you installed Python, for example: (folder names for Python can change depending on version)
+        * C:\Users\[username]\AppData\Local\Programs\Python\Python310\Scripts
+        * C:\Users\[username]\AppData\Local\Programs\Python\Python310
+    7. Click "Ok" until all pop ups disappear
+    
+* Failed building wheel for pandas” error:
+    1. Change the line "pandas == 1.2.1" to “pandas == 1.4.2” in requirements.txt.
 
 
 ### Creating a .env file
@@ -36,8 +49,9 @@ INSTANCE={YOUR API DOMAIN}
 * `source venv/bin/activate` (to enter the virtual environment)
 * `pip install -r requirements.txt` (to install the requirements in the current environment)
 
-* **Notes for Windows Users**: `source venv/bin/activate` is a Linux command. The command `venv\Scripts\activate` is for Windows.
-* However, another problem may follow for Windows showing scripts are disabled. In this case, go to Windows Powershell by searching for it from Start. Enter the command `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` then try `venv\Scripts\activate` again.
+**Troubleshooting for Window Users:**
+* `source venv/bin/activate` is a Linux command. The command `venv\Scripts\activate` is for Windows, read below if the command still does not work.
+* Problem may follow for Windows showing scripts are disabled. In this case, go to Windows Powershell by searching for it from Start. Enter the command `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`, type in "Y" and press enter. Then, try `venv\Scripts\activate` again.
 
 ### Running a Python Script
 
@@ -52,6 +66,8 @@ INSTANCE={YOUR API DOMAIN}
 
 
 * A student under **id** is assigned to the corresponding assignment under **assignment_id**. (assignment id is different from quiz id)
+    * **id**: Obtain either from the Canva's Gradebook or the Canvas URL. (canvas.ubc.ca/courses/[course code]/users/[**id**])
+    * **assignment_id**: Click into "Assignments" tab inside of the Canvas course, right click the assignment and click "Copy link address". Then, paste it somewhere so you can see the assignment id. (canvas.ubc.ca/courses/[course code]/assignments/[**assignment_id**])
 * To run the script, you can either use your terminal or drag and drop the input csv in the script file.
 * When using the terminal, navigate to the folder which contains the local repository and type in `python3 assign_quiz.py [Enter you input file followed by .csv].` Make sure that the input file exists within your local repository folder.
 * **Note**: Try running `python assign_quiz.py [Enter you input file followed by .csv]` if the above command does not work.
