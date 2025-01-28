@@ -12,18 +12,22 @@ def assign_quiz(canvas, assignment_id, course_id, student_id):
     try:
         course = canvas.get_course(course_id)
         assignment = course.get_assignment(assignment_id)
-    except canvasapi.exceptions.Unauthorized as e:
-        print(
-            f"ERROR: Course ({course_id}) does not exist OR user is not authorized to access"
-        )
-        return
     except TypeError:
         print(f"ERROR: Course ID must be an INTEGER. Instead given: {course_id}")
         return
+    except canvasapi.exceptions.Unauthorized as e:
+        print(f"ERROR: Course ({course_id}) does not exist OR user is not authorized to access.")
+        return
+    except canvasapi.exceptions.ResourceDoesNotExist as e:
+        print(f"ERROR: Assignment ID, {assignment_id}, does not exist. Please check that this is not the Quiz ID.")
+        return
+    except canvasapi.exceptions.InvalidAccessToken as e:
+        print("ERROR: Your Access Token is not valid. Please check to see if it has expired.")
+        return
     except Exception as e:
-        print(
-            f"ERROR: Unable to fetch assignment, please check assignment ID: {assignment_id}"
-        )
+        print("ERROR: There was an issue processing your request. Please see the error message below:")
+        print(type(e))
+        print(e)
         return
 
     # Filter out students who could not be found
