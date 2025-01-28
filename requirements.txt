@@ -3,3 +3,4 @@ canvasapi
 urllib3 == 1.26.2
 python-dotenv
 numpy == 1.26.3
+
